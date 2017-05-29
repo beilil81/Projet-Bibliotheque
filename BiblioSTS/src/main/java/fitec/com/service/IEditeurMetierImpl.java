@@ -38,10 +38,10 @@ public class IEditeurMetierImpl implements IEditeurMetier {
 	@Override
 	public void delete(Integer id) {
 		
-		System.out.println("TEST DELETE Ed 1");
+		System.out.println("TEST DELETE Ed : " +id);
 		List<Livre> list = daoEditeur.getAllLivresByEditeurId(id);
 		System.out.println("TEST XXXXXXXXXXXX : " + list);
-		if(list != null || list.size()!=0) {
+		if(list != null && list.size()>0) {
 			System.out.println("Ne peut pas supprimer cet Editeur car au moins un livre y est rattaché");
 			throw new RuntimeException("Delete Error : Un livre est lié à cette éditeur");
 		} else {

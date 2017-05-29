@@ -28,10 +28,13 @@ public class EditeurController {
 	}
 	
 	@RequestMapping("/addEditeur")
-	public String createEditeur(Model model) {
+	public String createEditeur(Model model, String nomEditeur) {
 		
-		System.out.println("create Editeur Success ");
-		return "editeurs";
+		System.out.println("create Editeur Success :  " + nomEditeur);
+		Editeur editeur = new Editeur();
+		editeur.setNom(nomEditeur);
+		editeurMetier.add(editeur);
+		return "redirect:/editeurs";
 	}
 	
 	@RequestMapping("/deleteEditeur")
@@ -43,37 +46,48 @@ public class EditeurController {
 			
 		}
 		
-		return index(model);
+		return "redirect:/editeurs";
 	}
 	
 	@RequestMapping("/editEditeur")
-	public String updateEditeur(ModelAndView model) {
+	public String updateEditeur(ModelAndView model,Integer idEditeur, String nomEditeur) {
 		
-		Editeur editeur = (Editeur)model.getModel().get("editeur");
-		System.out.println("Editeur : "+editeur + "   NOM : "+editeur.getNom());
+		Editeur editeur = editeurMetier.find(idEditeur);
+		editeur.setNom(nomEditeur);
+		System.out.println("Editeur id : "+idEditeur + "   NOM : "+nomEditeur);
+		editeur = editeurMetier.update(editeur);
 		
-		return index((Model)model);
+		return "redirect:/editeurs";
 	}
 
 	/*Affiche la page formEditeur.html pour Modifier un Editeur*/
 	@RequestMapping("/editFormEditeur")
 	public String displayEditFormEditeur(Model model, @RequestParam("id")Integer id) {
 		
+		model.addAttribute("edit", 1);//pour avoir le formulaire d'edition
 		Editeur editeur = editeurMetier.find(id);
 		model.addAttribute("editeur", editeur);
 		
-		return "/formEditeurs";
+		return "/formEditeur";
 	}
 	
 	/*Affiche la page formEditeur.html pour Ajouter un Editeur*/
 	@RequestMapping("/addFormEditeur")
 	public String displayAddFormEditeur(Model model) {
 		
-		Editeur editeur = new Editeur();
-		model.addAttribute("editeur", editeur);
+		model.addAttribute("edit", 0);//pour avoir le formulaire d'ajout
 		
-		return "/formEditeurs";
+		return "/formEditeur";
 	}
 
+	
+	/*Affiche la page formEditeur.html pour Ajouter un Editeur*/
+	@RequestMapping("/testEditeur")
+	public String testEditeur(Model model,String coco) {
+		
+		System.out.println("TEST coco : " + coco);
+		
+		return "redirect:/editeurs";
+	}
 
 }

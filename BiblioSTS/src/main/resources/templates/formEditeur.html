@@ -4,29 +4,52 @@
 	layout:decorator="template1">
 <head>
 <meta charset="utf-8" />
-<title>Les Auteurs</title>
+<title>Les Editeurs</title>
 </head>
 <body>
 	<div layout:fragment="content">
 
 		<div class="col-xs-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">Liste de tous les auteurs</div>
+		
+			<div class="panel panel-primary" th:if="${edit} != 0"><!-- editeur.id != 0 means mode=EDIT -->
+				<div class="panel-heading">Ajout-Edit : éditeur</div>
 				<div class="panel-body">
-					<form th:action="@{/addFormAuteur}" method="get">
+					<form th:action="@{/editEditeur}" method="post">
 						<div>
 							<table class="table table-condensed table-hover table-striped">
-								<thead><td><h3>Id</h3></td><td><h3>Nom de l'auteur</h3></td><td><h3>Prénom de l'auteur</h3></td><td></td><td></td></thead>
-								<tr th:each="auteur:${listAllAuteurs}">
-									 <td th:text="${auteur.id}"/><td th:text="${auteur.nom}"/><td th:text="${auteur.prenom}"/><td><a th:href="@{/editFormAuteur(id=${auteur.id})}">Editer</a></td><td><a th:href="@{/deleteAuteur(id=${auteur.id})}">Supprimer</a></td>
-								 </tr>
+								<thead><td><h3>EDIT EDITEUR</h3></td><td></td></thead>
+								<tr>
+									<td><label>Nom : </label></td><td><input type="text"  name="nomEditeur" th:value="${editeur.nom}"/></td>
+									<td><input type="hidden" name="idEditeur" th:value="${editeur.id}"/></td>
+								</tr>
 							</table>
 
-							<button type="submit" class="btn btn-primary">Ajouter un Auteur</button>
+							<button type="submit" class="btn btn-primary">Modifie Editeur</button>
 						</div>
 					</form>
 				</div>
 			</div>
+			
+			<div class="panel panel-primary" th:if="${edit} == 0"><!-- editeur.id == 0 means mode=ADD -->
+				<div class="panel-heading">Ajout-Edit : éditeur</div>
+				<div class="panel-body">
+					<form th:action="@{/addEditeur(editeur=${editeur})}" method="post">
+						<div>
+							<table class="table table-condensed table-hover table-striped">
+								<thead><td><h3>AJOUT EDITEUR</h3></td><td></td></thead>
+								<tr>
+									 <td><label>Nom : </label></td><td><input type="text" name="nomEditeur" /></td>
+								 </tr>
+							</table>
+
+							<button type="submit" class="btn btn-primary">Ajoute Editeur</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			
+			
 		</div>
 
 		<!-- 		<div class="panel panel-primary" th:if="${compte}"> -->

@@ -4,25 +4,25 @@
 	layout:decorator="template1">
 <head>
 <meta charset="utf-8" />
-<title>Les Auteurs</title>
+<title>Les Livres</title>
 </head>
 <body>
 	<div layout:fragment="content">
 
 		<div class="col-xs-12">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Liste de tous les auteurs</div>
+				<div class="panel-heading">Liste de tous les livres</div>
 				<div class="panel-body">
-					<form th:action="@{/addFormAuteur}" method="get">
+					<form th:action="@{/addFormLivre}" method="get">
 						<div>
 							<table class="table table-condensed table-hover table-striped">
-								<thead><td><h3>Id</h3></td><td><h3>Nom de l'auteur</h3></td><td><h3>Prénom de l'auteur</h3></td><td></td><td></td></thead>
-								<tr th:each="auteur:${listAllAuteurs}">
-									 <td th:text="${auteur.id}"/><td th:text="${auteur.nom}"/><td th:text="${auteur.prenom}"/><td><a th:href="@{/editFormAuteur(id=${auteur.id})}">Editer</a></td><td><a th:href="@{/deleteAuteur(id=${auteur.id})}">Supprimer</a></td>
+								<thead><td><h3>Id</h3></td><td><h3>Titre du livre</h3></td><td><h3>Auteur</h3></td><td><h3>Editeur</h3></td><td><h3>Prix du livre</h3></td><td><h3>Nombre de pages</h3></td><td></td><td></td></thead>
+								<tr th:each="livre:${listAllLivres}">
+									 <td th:text="${livre.id}"/><td th:text="${livre.titre}"/><td th:text="${livre.auteur.nom}" /><td th:text="${livre.editeur.nom}"/><td th:text="${livre.prix}"/><td th:text="${livre.nb_pages}"/><td><a th:href="@{/editFormLivre(id=${livre.id})}">Editer</a></td><td><a th:href="@{/deleteLivre(id=${livre.id})}">Supprimer</a></td>
 								 </tr>
 							</table>
 
-							<button type="submit" class="btn btn-primary">Ajouter un Auteur</button>
+							<button type="submit" class="btn btn-primary">Ajouter un Livre</button>
 						</div>
 					</form>
 				</div>

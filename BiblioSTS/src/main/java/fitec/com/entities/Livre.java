@@ -23,6 +23,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="livre")
 public class Livre implements Serializable {
+	
 	/**
 	 * 
 	 */
@@ -57,7 +58,7 @@ public class Livre implements Serializable {
 	/**
 	 * Description of the property nbpages.
 	 */
-	private int nb_pages = 0;
+	private Integer nb_pages = 0;
 
 	private Float prix;
 
@@ -150,21 +151,14 @@ public class Livre implements Serializable {
 		this.editeur = newEditeur;
 	}
 
-	/**
-	 * Returns nbpages.
-	 * @return nbpages 
-	 */
-	public int getNbPages() {
-		return this.nb_pages;
+	public Integer getNb_pages() {
+		return nb_pages;
 	}
 
-	/**
-	 * Sets a value to attribute nbpages. 
-	 * @param newNbpages 
-	 */
-	public void setNbPages(int newNbPages) {
-		this.nb_pages = newNbPages;
+	public void setNb_pages(Integer nb_pages) {
+		this.nb_pages = nb_pages;
 	}
+
 
 	public Float getPrix() {
 		return prix;

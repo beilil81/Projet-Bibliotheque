@@ -39,7 +39,7 @@ public class IAuteurMetierImpl implements IAuteurMetier {
 	public void delete(Integer id) {
 		
 		List<Livre> list = daoAuteur.getAllLivresByAuteurId(id);
-		if(list != null || list.size()!=0) {
+		if(list != null && list.size()>0) {
 			System.out.println("Ne peut pas supprimer cet Auteur car au moins un livre y est rattaché");
 			throw new RuntimeException("Delete Error : Un livre est lié à cette auteur");
 		} else {
